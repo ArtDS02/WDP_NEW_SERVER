@@ -1,0 +1,17 @@
+{
+    "name": "Test Collection",
+    "numberOfQuestion": 10,
+    "price": 100,
+    "questions": [
+        "6671a855a4e23715b141b0f8",
+        "6671a89ea4e23715b141b0fc",
+        "6671a8aea4e23715b141b100",
+        "6671a8afa4e23715b141b104",
+        "6671a8bfa4e23715b141b108",
+        "6671a8cfa4e23715b141b10c",
+        "6671a8dfa4e23715b141b110",
+        "6671a8efa4e23715b141b114",
+        "6671a8ffa4e23715b141b118",
+        "6671a90fa4e23715b141b11c"
+    ]
+}

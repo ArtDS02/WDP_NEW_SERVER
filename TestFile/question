@@ -1,0 +1,272 @@
+[
+    {
+        "_id": "6671a855a4e23715b141b0f8",
+        "detail": "1 + 1 = ?",
+        "answerA": "2",
+        "answerB": "1",
+        "answerC": "3",
+        "answerD": "4",
+        "trueAnswer": "A"
+    },
+    {
+        "_id": "6671a89ea4e23715b141b0fc",
+        "detail": "Which country is located in Asia?",
+        "answerA": "USA",
+        "answerB": "Vietnam",
+        "answerC": "Germany",
+        "answerD": "France",
+        "trueAnswer": "B"
+    },
+    {
+        "_id": "6671a8aea4e23715b141b100",
+        "detail": "What is the capital of France?",
+        "answerA": "Berlin",
+        "answerB": "Madrid",
+        "answerC": "Paris",
+        "answerD": "Rome",
+        "trueAnswer": "C"
+    },
+    {
+        "_id": "6671a8afa4e23715b141b104",
+        "detail": "What is the largest planet in our solar system?",
+        "answerA": "Earth",
+        "answerB": "Mars",
+        "answerC": "Jupiter",
+        "answerD": "Saturn",
+        "trueAnswer": "C"
+    },
+    {
+        "_id": "6671a8bfa4e23715b141b108",
+        "detail": "Who wrote 'Romeo and Juliet'?",
+        "answerA": "Charles Dickens",
+        "answerB": "Jane Austen",
+        "answerC": "William Shakespeare",
+        "answerD": "Mark Twain",
+        "trueAnswer": "C"
+    },
+    {
+        "_id": "6671a8cfa4e23715b141b10c",
+        "detail": "What is the boiling point of water?",
+        "answerA": "90°C",
+        "answerB": "100°C",
+        "answerC": "110°C",
+        "answerD": "120°C",
+        "trueAnswer": "B"
+    },
+    {
+        "_id": "6671a8dfa4e23715b141b110",
+        "detail": "What is the currency of Japan?",
+        "answerA": "Yen",
+        "answerB": "Won",
+        "answerC": "Dollar",
+        "answerD": "Euro",
+        "trueAnswer": "A"
+    },
+    {
+        "_id": "6671a8efa4e23715b141b114",
+        "detail": "What is the smallest prime number?",
+        "answerA": "0",
+        "answerB": "1",
+        "answerC": "2",
+        "answerD": "3",
+        "trueAnswer": "C"
+    },
+    {
+        "_id": "6671a8ffa4e23715b141b118",
+        "detail": "What is the chemical symbol for gold?",
+        "answerA": "Au",
+        "answerB": "Ag",
+        "answerC": "Pb",
+        "answerD": "Fe",
+        "trueAnswer": "A"
+    },
+    {
+        "_id": "6671a90fa4e23715b141b11c",
+        "detail": "Who is the author of '1984'?",
+        "answerA": "George Orwell",
+        "answerB": "Aldous Huxley",
+        "answerC": "J.K. Rowling",
+        "answerD": "J.R.R. Tolkien",
+        "trueAnswer": "A"
+    },
+    {
+        "_id": "6671a91fa4e23715b141b120",
+        "detail": "What is the capital city of Australia?",
+        "answerA": "Sydney",
+        "answerB": "Melbourne",
+        "answerC": "Brisbane",
+        "answerD": "Canberra",
+        "trueAnswer": "D"
+    },
+    {
+        "_id": "6671a92fa4e23715b141b124",
+        "detail": "Which planet is known as the Red Planet?",
+        "answerA": "Venus",
+        "answerB": "Mars",
+        "answerC": "Jupiter",
+        "answerD": "Saturn",
+        "trueAnswer": "B"
+    },
+    {
+        "_id": "6671a93fa4e23715b141b128",
+        "detail": "How many continents are there on Earth?",
+        "answerA": "5",
+        "answerB": "6",
+        "answerC": "7",
+        "answerD": "8",
+        "trueAnswer": "C"
+    },
+    {
+        "_id": "6671a94fa4e23715b141b12c",
+        "detail": "What is the largest ocean on Earth?",
+        "answerA": "Atlantic Ocean",
+        "answerB": "Indian Ocean",
+        "answerC": "Southern Ocean",
+        "answerD": "Pacific Ocean",
+        "trueAnswer": "D"
+    },
+    {
+        "_id": "6671a95fa4e23715b141b130",
+        "detail": "What is the square root of 64?",
+        "answerA": "6",
+        "answerB": "7",
+        "answerC": "8",
+        "answerD": "9",
+        "trueAnswer": "C"
+    },
+    {
+        "_id": "6671a96fa4e23715b141b134",
+        "detail": "What is the longest river in the world?",
+        "answerA": "Amazon River",
+        "answerB": "Nile River",
+        "answerC": "Yangtze River",
+        "answerD": "Mississippi River",
+        "trueAnswer": "B"
+    },
+    {
+        "_id": "6671a97fa4e23715b141b138",
+        "detail": "Who painted the Mona Lisa?",
+        "answerA": "Vincent van Gogh",
+        "answerB": "Pablo Picasso",
+        "answerC": "Leonardo da Vinci",
+        "answerD": "Claude Monet",
+        "trueAnswer": "C"
+    },
+    {
+        "_id": "6671a98fa4e23715b141b13c",
+        "detail": "What is the hardest natural substance on Earth?",
+        "answerA": "Gold",
+        "answerB": "Iron",
+        "answerC": "Diamond",
+        "answerD": "Platinum",
+        "trueAnswer": "C"
+    },
+    {
+        "_id": "6671a99fa4e23715b141b140",
+        "detail": "Which gas is most abundant in the Earth's atmosphere?",
+        "answerA": "Oxygen",
+        "answerB": "Hydrogen",
+        "answerC": "Nitrogen",
+        "answerD": "Carbon Dioxide",
+        "trueAnswer": "C"
+    },
+    {
+        "_id": "6671a9afa4e23715b141b144",
+        "detail": "What is the capital of Italy?",
+        "answerA": "Venice",
+        "answerB": "Milan",
+        "answerC": "Rome",
+        "answerD": "Florence",
+        "trueAnswer": "C"
+    },
+    {
+        "_id": "6671a9bfa4e23715b141b148",
+        "detail": "What is the smallest country in the world?",
+        "answerA": "Monaco",
+        "answerB": "Vatican City",
+        "answerC": "San Marino",
+        "answerD": "Liechtenstein",
+        "trueAnswer": "B"
+    },
+    {
+        "_id": "6671a9cfa4e23715b141b14c",
+        "detail": "What is the speed of light?",
+        "answerA": "300,000 km/s",
+        "answerB": "150,000 km/s",
+        "answerC": "200,000 km/s",
+        "answerD": "100,000 km/s",
+        "trueAnswer": "A"
+    },
+    {
+        "_id": "6671a9dfa4e23715b141b150",
+        "detail": "What is the tallest mountain in the world?",
+        "answerA": "K2",
+        "answerB": "Kangchenjunga",
+        "answerC": "Mount Everest",
+        "answerD": "Lhotse",
+        "trueAnswer": "C"
+    },
+    {
+        "_id": "6671a9efa4e23715b141b154",
+        "detail": "Who invented the telephone?",
+        "answerA": "Thomas Edison",
+        "answerB": "Alexander Graham Bell",
+        "answerC": "Nikola Tesla",
+        "answerD": "Guglielmo Marconi",
+        "trueAnswer": "B"
+    },
+    {
+        "_id": "6671a9ffa4e23715b141b158",
+        "detail": "What is the most spoken language in the world?",
+        "answerA": "Spanish",
+        "answerB": "English",
+        "answerC": "Hindi",
+        "answerD": "Mandarin",
+        "trueAnswer": "D"
+    },
+    {
+        "_id": "6671aa0fa4e23715b141b15c",
+        "detail": "What is the chemical symbol for water?",
+        "answerA": "H2O",
+        "answerB": "O2",
+        "answerC": "CO2",
+        "answerD": "HO",
+        "trueAnswer": "A"
+    },
+    {
+        "_id": "6671aa1fa4e23715b141b160",
+        "detail": "Which planet is closest to the sun?",
+        "answerA": "Venus",
+        "answerB": "Earth",
+        "answerC": "Mars",
+        "answerD": "Mercury",
+        "trueAnswer": "D"
+    },
+    {
+        "_id": "6671aa2fa4e23715b141b164",
+        "detail": "What is the largest bone in the human body?",
+        "answerA": "Femur",
+        "answerB": "Humerus",
+        "answerC": "Tibia",
+        "answerD": "Fibula",
+        "trueAnswer": "A"
+    },
+    {
+        "_id": "6671aa3fa4e23715b141b168",
+        "detail": "Who discovered penicillin?",
+        "answerA": "Louis Pasteur",
+        "answerB": "Alexander Fleming",
+        "answerC": "Marie Curie",
+        "answerD": "Joseph Lister",
+        "trueAnswer": "B"
+    },
+    {
+        "_id": "6671aa4fa4e23715b141b16c",
+        "detail": "What is the longest river in the United States?",
+        "answerA": "Mississippi River",
+        "answerB": "Missouri River",
+        "answerC": "Yukon River",
+        "answerD": "Rio Grande",
+        "trueAnswer": "B"
+    }
+]
