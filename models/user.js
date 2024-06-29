@@ -34,6 +34,10 @@ const userSchema = new Schema({
   admin: {
     type: Boolean,
     default: false
+  },
+  memberShip:{
+    type: Boolean,
+    default: false
   }
 });
 
