@@ -19,7 +19,7 @@ examRouter.post('/', authenticate.verifyUser, (req, res, next) => {
 });
 
 // Route to get all Exams //Done
-examRouter.get('/', authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
+examRouter.get('/', authenticate.verifyUser, (req, res, next) => {
   Exam.find({})
     .then(exams => {
       res.statusCode = 200;

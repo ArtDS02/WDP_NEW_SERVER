@@ -28,6 +28,18 @@ enrollmentRouter.get('/', authenticate.verifyUser, (req, res, next) => {
     .catch(err => next(err));
 });
 
+// Route to get all Enrollments for user //Done
+enrollmentRouter.get('/result', authenticate.verifyUser, (req, res, next) => {
+  Enrollment.find({}).populate('examId')
+    .then(enrollments => {
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(enrollments);
+    })
+    .catch(err => next(err));
+});
+
+
 // Route to get Enrollments by userId  //Done
 enrollmentRouter.get('/user/:userId', authenticate.verifyUser, (req, res, next) => {
   Enrollment.find({ userId: req.params.userId })

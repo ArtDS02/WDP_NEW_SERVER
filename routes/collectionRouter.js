@@ -164,4 +164,39 @@ collectionRouter.delete('/:id', authenticate.verifyUser, async (req, res, next) 
   }
 });
 
+// Route to get a specific collection by ID and random question  //Done// Route to get a specific collection by ID and random question
+collectionRouter.get('/:id/random/:number', authenticate.verifyUser, async (req, res, next) => {
+  try {
+    const { id, number } = req.params; // Lấy số lượng câu hỏi từ params
+
+    const collection = await Collection.findOne({ _id: id }).populate('questions');
+    if (!collection) {
+      return res.status(404).json({ error: 'Collection not found or unauthorized access' });
+    }
+
+    // Lấy danh sách câu hỏi từ collection
+    const { questions } = collection;
+
+    // Kiểm tra nếu số lượng câu hỏi yêu cầu lớn hơn số câu hỏi thực tế có trong collection
+    const totalQuestions = questions.length;
+    const count = number > totalQuestions ? totalQuestions : parseInt(number, 10);
+
+    // Hàm để lấy một mảng ngẫu nhiên từ một mảng cho trước
+    const getRandomQuestions = (arr, n) => {
+      const shuffled = arr.sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, n);
+    };
+
+    // Lấy danh sách câu hỏi ngẫu nhiên
+    const randomQuestions = getRandomQuestions(questions, count);
+
+    res.status(200).json(randomQuestions);
+  } catch (err) {
+    next(err);
+  }
+});
+
+
+
+
 module.exports = collectionRouter;

@@ -76,7 +76,7 @@ app.use('/order', require('./controllers/order-controller'));
 
 // Route để tạo link thanh toán
 app.post('/create-payment-link', authenticate.verifyUser, async (req, res) => {
-    const YOUR_DOMAIN = 'http://localhost:3000';
+    const YOUR_DOMAIN = 'http://localhost:3001';
     const { number } = req.body;
     console.log("number = ", number);
     console.log("type of number = ", typeof(Number(number)));
@@ -85,8 +85,8 @@ app.post('/create-payment-link', authenticate.verifyUser, async (req, res) => {
         orderCode: Number(String(Date.now()).slice(-6)),
         amount: Number(number),
         description: 'Thanh toan nap tien',
-        returnUrl: `${YOUR_DOMAIN}/success.html`,
-        cancelUrl: `${YOUR_DOMAIN}/cancel.html`
+        returnUrl: `${YOUR_DOMAIN}/depositSuccess`,
+        cancelUrl: `${YOUR_DOMAIN}/depositCancel`
     };
 
     try {

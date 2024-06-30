@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const User = require('../models/user');
-const mongoose = require('mongoose'); // Import Mongoose
+const mongoose = require('mongoose');
 const passport = require('passport');
 const authenticate = require('../authen/authenticate');
 
@@ -69,7 +69,9 @@ userRouter.get("/:userId", authenticate.verifyUser, (req, res, next) => {
           username: user.username,
           email: user.email,
           DOB: user.DOB,
-          favoriteCollection: user.favoriteCollection
+          wallet: user.wallet,
+          favoriteCollection: user.favoriteCollection,
+          memberShip: user.memberShip
         });
       } else {
         res.statusCode = 404;
@@ -114,25 +116,24 @@ userRouter.get('/', authenticate.verifyUser, authenticate.verifyAdmin, (req, res
     .catch((err) => next(err));
 });
 
-
-// Route to delete a users by ID //Done
+// Route to delete a user by ID
 userRouter.delete('/:id', authenticate.verifyUser, authenticate.verifyAdmin, (req, res, next) => {
   User.findByIdAndDelete(req.params.id)
-    .then(question => {
-      if (question) {
+    .then(user => {
+      if (user) {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json({ success: true, message: 'User deleted' });
       } else {
         res.statusCode = 404;
         res.setHeader('Content-Type', 'application/json');
-        res.json({ error: 'Question not found' });
+        res.json({ error: 'User not found' });
       }
     })
     .catch(err => next(err));
 });
 
-// Router to add favorite collection
+// Route to add favorite collection
 userRouter.post('/:userId/addCollection', authenticate.verifyUser, async (req, res) => {
   try {
     const userId = req.params.userId;
@@ -164,7 +165,7 @@ userRouter.post('/:userId/addCollection', authenticate.verifyUser, async (req, r
   }
 });
 
-// Router to get all favorite Collection
+// Route to get all favorite collections
 userRouter.get('/:userId/favoriteCollections', authenticate.verifyUser, async (req, res) => {
   try {
     const userId = req.params.userId;
@@ -181,5 +182,65 @@ userRouter.get('/:userId/favoriteCollections', authenticate.verifyUser, async (r
     res.status(500).json({ error: 'An error occurred', details: error.message });
   }
 });
+
+// Route to add favorite collection
+userRouter.post('/:userId/addCollection', authenticate.verifyUser, async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const { collectionId } = req.body;
+
+    if (!collectionId || !mongoose.Types.ObjectId.isValid(collectionId)) {
+      return res.status(400).json({ error: 'Valid CollectionID is required' });
+    }
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    if (!Array.isArray(user.favoriteCollection)) {
+      user.favoriteCollection = [];
+    }
+
+    if (!user.favoriteCollection.includes(collectionId)) {
+      user.favoriteCollection.push(collectionId);
+      await user.save();
+    }
+
+    res.status(200).json({ message: 'Collection added successfully', user });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'An error occurred', details: error.message });
+  }
+});
+
+// Route to add money to wallet
+userRouter.post('/:userId/add-money', authenticate.verifyUser, async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const { amount } = req.body;
+
+    if (!amount || isNaN(amount) || amount <= 0) {
+      return res.status(400).json({ message: 'Invalid amount' });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Convert amount to number
+    const amountToAdd = parseInt(amount);
+
+    user.wallet += amountToAdd;
+    await user.save();
+
+    res.status(200).json({ message: 'Money added successfully', wallet: user.wallet });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error', error: error.message });
+  }
+});
+
 
 module.exports = userRouter;

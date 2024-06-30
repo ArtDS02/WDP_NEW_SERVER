@@ -7,8 +7,8 @@ const enrollmentSchema = new Schema({
     default: ''
   },
   examId:{
-    type: String,
-    default: ''
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Exam' 
   },
   score:{
     type: Number,
