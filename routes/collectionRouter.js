@@ -8,16 +8,14 @@ const Question = require('../models/question');
 const collectionRouter = express.Router();
 collectionRouter.use(bodyParser.json());
 
-// Route to get all collections by the current user // New Route
+// Route to get all collections by the current user
 collectionRouter.get('/mycollections', authenticate.verifyUser, async (req, res, next) => {
   try {
-    const collections = await Collection.find({ userId: req.user._id })
-      .populate('questions');
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json(collections);
-  } catch (err) {
-    next(err);
+    const userId = req.user._id; // Assuming authenticate.verifyUser adds the user to req
+    const collections = await Collection.find({ userId }).populate('userId').exec();
+    res.status(200).json(collections);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching collections', error });
   }
 });
 
@@ -75,7 +73,7 @@ collectionRouter.post('/addCollection', async (req, res) => {
 collectionRouter.get('/', authenticate.verifyUser, async (req, res, next) => {
   try {
     const collections = await Collection.find({})
-      .populate('questions'); 
+      .populate('userId'); 
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json(collections);
