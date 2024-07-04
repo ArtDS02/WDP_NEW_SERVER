@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const enrollmentSchema = new Schema({
   userId: {
-    type: String,
-    default: ''
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   },
   examId:{
     type: mongoose.Schema.Types.ObjectId,

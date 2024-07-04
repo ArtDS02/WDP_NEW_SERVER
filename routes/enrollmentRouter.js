@@ -42,7 +42,7 @@ enrollmentRouter.get('/result', authenticate.verifyUser, (req, res, next) => {
 
 // Route to get Enrollments by userId  //Done
 enrollmentRouter.get('/user/:userId', authenticate.verifyUser, (req, res, next) => {
-  Enrollment.find({ userId: req.params.userId })
+  Enrollment.find({ userId: req.params.userId }).populate('examId')
     .then(enrollments => {
       if (enrollments && enrollments.length > 0) {
         res.statusCode = 200;

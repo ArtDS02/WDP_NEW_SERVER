@@ -71,7 +71,8 @@ userRouter.get("/:userId", authenticate.verifyUser, (req, res, next) => {
           DOB: user.DOB,
           wallet: user.wallet,
           favoriteCollection: user.favoriteCollection,
-          memberShip: user.memberShip
+          memberShip: user.memberShip,
+          admin: user.admin
         });
       } else {
         res.statusCode = 404;
@@ -239,6 +240,50 @@ userRouter.post('/:userId/add-money', authenticate.verifyUser, async (req, res) 
     res.status(200).json({ message: 'Money added successfully', wallet: user.wallet });
   } catch (error) {
     res.status(500).json({ message: 'Internal server error', error: error.message });
+  }
+});
+
+// Route để tìm kiếm người dùng bằng email và cập nhật mật khẩu
+userRouter.put('/update-password', async (req, res) => {
+  console.log("Bắt đầu xử lý yêu cầu cập nhật mật khẩu");
+  const { email, newPassword } = req.body;
+
+  if (!email || !newPassword) {
+    console.log("Thiếu email hoặc mật khẩu mới");
+    return res.status(400).json({ message: 'Email và mật khẩu mới là bắt buộc' });
+  }
+
+  try {
+    // Tìm kiếm người dùng bằng email
+    console.log('Tìm kiếm người dùng:', email);
+    const user = await User.findOne({ email });
+    if (!user) {
+      console.log('Không tìm thấy người dùng');
+      return res.status(404).json({ message: 'Không tìm thấy người dùng' });
+    }
+
+    // Cập nhật mật khẩu người dùng
+    console.log('Cập nhật mật khẩu cho người dùng:', user);
+    user.setPassword(newPassword, (err) => {
+      if (err) {
+        console.log('Lỗi khi cập nhật mật khẩu:', err);
+        return res.status(500).json({ message: 'Lỗi khi cập nhật mật khẩu' });
+      }
+
+      // Lưu người dùng với mật khẩu mới
+      user.save((err) => {
+        if (err) {
+          console.log('Lỗi khi lưu người dùng:', err);
+          return res.status(500).json({ message: 'Lỗi khi lưu người dùng' });
+        }
+
+        console.log('Cập nhật mật khẩu thành công');
+        res.status(200).json({ message: 'Cập nhật mật khẩu thành công' });
+      });
+    });
+  } catch (error) {
+    console.error('Error updating password:', error);
+    res.status(500).json({ message: 'Lỗi máy chủ', error });
   }
 });
 

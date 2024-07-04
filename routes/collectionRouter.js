@@ -162,6 +162,7 @@ collectionRouter.delete('/:id', authenticate.verifyUser, async (req, res, next) 
   }
 });
 
+// Route to get a specific collection by ID and random question
 // Route to get a specific collection by ID and random question  //Done// Route to get a specific collection by ID and random question
 collectionRouter.get('/:id/random/:number', authenticate.verifyUser, async (req, res, next) => {
   try {
@@ -194,7 +195,29 @@ collectionRouter.get('/:id/random/:number', authenticate.verifyUser, async (req,
   }
 });
 
+// Route to update userId to null for a collection
+collectionRouter.put('/update-userId/:collectionId', authenticate.verifyUser, async (req, res) => {
+  const collectionId = req.params.collectionId;
 
+  try {
+    // Tìm collection bằng collectionId
+    const collection = await Collection.findById(collectionId);
+
+    if (!collection) {
+      return res.status(404).json({ message: 'Không tìm thấy collection' });
+    }
+
+    // Cập nhật userId thành null
+    collection.userId = null;
+
+    // Lưu collection đã cập nhật
+    const updatedCollection = await collection.save();
+
+    res.status(200).json({ message: 'Đã cập nhật userId thành null', collection: updatedCollection });
+  } catch (error) {
+    res.status(500).json({ message: 'Lỗi máy chủ', error });
+  }
+});
 
 
 module.exports = collectionRouter;
