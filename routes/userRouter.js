@@ -243,49 +243,57 @@ userRouter.post('/:userId/add-money', authenticate.verifyUser, async (req, res) 
   }
 });
 
-// Route để tìm kiếm người dùng bằng email và cập nhật mật khẩu
-userRouter.put('/update-password', async (req, res) => {
-  console.log("Bắt đầu xử lý yêu cầu cập nhật mật khẩu");
-  const { email, newPassword } = req.body;
-
-  if (!email || !newPassword) {
-    console.log("Thiếu email hoặc mật khẩu mới");
-    return res.status(400).json({ message: 'Email và mật khẩu mới là bắt buộc' });
-  }
-
+// Get User by username
+userRouter.get('/getName/:username', async (req, res) => {
   try {
-    // Tìm kiếm người dùng bằng email
-    console.log('Tìm kiếm người dùng:', email);
-    const user = await User.findOne({ email });
+    const username = req.params.username;
+    const user = await User.findOne({ username });
+
     if (!user) {
-      console.log('Không tìm thấy người dùng');
-      return res.status(404).json({ message: 'Không tìm thấy người dùng' });
+      return res.status(404).json({ message: 'User not found' });
     }
 
-    // Cập nhật mật khẩu người dùng
-    console.log('Cập nhật mật khẩu cho người dùng:', user);
-    user.setPassword(newPassword, (err) => {
-      if (err) {
-        console.log('Lỗi khi cập nhật mật khẩu:', err);
-        return res.status(500).json({ message: 'Lỗi khi cập nhật mật khẩu' });
-      }
-
-      // Lưu người dùng với mật khẩu mới
-      user.save((err) => {
-        if (err) {
-          console.log('Lỗi khi lưu người dùng:', err);
-          return res.status(500).json({ message: 'Lỗi khi lưu người dùng' });
-        }
-
-        console.log('Cập nhật mật khẩu thành công');
-        res.status(200).json({ message: 'Cập nhật mật khẩu thành công' });
-      });
+    res.json({
+      userId: user._id,
+      email: user.email
     });
   } catch (error) {
-    console.error('Error updating password:', error);
-    res.status(500).json({ message: 'Lỗi máy chủ', error });
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
+// Route để tìm kiếm người dùng bằng id và cập nhật mật khẩu
+userRouter.put('/update-password/:userId', async (req, res) => {
+  console.log("Bắt đầu xử lý yêu cầu cập nhật mật khẩu");
+
+  const { userId } = req.params;
+  const { password } = req.body;
+
+  if (!password) {
+    return res.status(400).json({ message: 'Mật khẩu mới là bắt buộc' });
+  }
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'Người dùng không tồn tại' });
+    }
+
+    user.setPassword(password, async (err, user) => {
+      if (err) {
+        return res.status(500).json({ message: 'Có lỗi xảy ra khi cập nhật mật khẩu' });
+      }
+
+      await user.save(); // Lưu người dùng với mật khẩu mới
+      console.log("thanh cong");
+      return res.status(200).json({ message: 'Mật khẩu đã được cập nhật thành công' });
+    });
+  } catch (error) {
+    console.error("Lỗi trong quá trình cập nhật mật khẩu:", error);
+    return res.status(500).json({ message: 'Có lỗi xảy ra trong quá trình cập nhật mật khẩu' });
+  }
+});
 
 module.exports = userRouter;
