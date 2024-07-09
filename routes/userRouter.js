@@ -276,18 +276,21 @@ userRouter.put('/update-password/:userId', async (req, res) => {
 
   try {
     const user = await User.findById(userId);
+    console.log("Maakt khẩu muốn đổi:", password);
+    console.log("Tìm thấy người dùng:", user);
 
     if (!user) {
       return res.status(404).json({ message: 'Người dùng không tồn tại' });
     }
 
-    user.setPassword(password, async (err, user) => {
+    user.setPassword(password, async (err, updatedUser) => {
       if (err) {
+        console.error("Lỗi khi gọi setPassword:", err);
         return res.status(500).json({ message: 'Có lỗi xảy ra khi cập nhật mật khẩu' });
       }
 
-      await user.save(); // Lưu người dùng với mật khẩu mới
-      console.log("thanh cong");
+      await updatedUser.save(); // Lưu người dùng với mật khẩu mới
+      console.log("Người dùng đã được lưu với mật khẩu mới:", updatedUser);
       return res.status(200).json({ message: 'Mật khẩu đã được cập nhật thành công' });
     });
   } catch (error) {
@@ -295,5 +298,26 @@ userRouter.put('/update-password/:userId', async (req, res) => {
     return res.status(500).json({ message: 'Có lỗi xảy ra trong quá trình cập nhật mật khẩu' });
   }
 });
+
+// Router để xóa collection khỏi favorite
+userRouter.put('/:userId/favoriteCollection/:collectionId', authenticate.verifyUser, async (req, res) => {
+  const { userId, collectionId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    user.favoriteCollection.pull(collectionId);
+    await user.save();
+
+    res.status(200).json({ message: 'Collection removed from favorites', user });
+  } catch (error) {
+    res.status(500).json({ message: 'An error occurred', error });
+  }
+});
+
+
 
 module.exports = userRouter;
