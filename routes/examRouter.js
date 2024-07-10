@@ -81,4 +81,30 @@ examRouter.delete('/:id', authenticate.verifyUser, (req, res, next) => {
     .catch(err => next(err));
 });
 
+// Route to update an exam by ID
+examRouter.put('/:id', authenticate.verifyUser, async (req, res) => {
+  try {
+    const examId = req.params.id;
+
+
+    // Check if the exam exists
+    const exam = await Exam.findById(examId);
+    if (!exam) {
+      return res.status(404).json({ message: 'Exam not found' });
+    }
+
+
+    // Update the exam with the new details
+    const updatedExam = await Exam.findByIdAndUpdate(examId, { $set: req.body }, { new: true });
+
+
+    res.status(200).json({ message: 'Exam updated successfully', exam: updatedExam });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ message: 'Internal server error', error: error.message });
+  }
+});
+
+
+
 module.exports = examRouter;
